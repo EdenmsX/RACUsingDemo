@@ -15,6 +15,7 @@
 		378C9F84247FF2240078F0E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 378C9F82247FF2240078F0E2 /* LaunchScreen.storyboard */; };
 		378C9F87247FF2240078F0E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 378C9F86247FF2240078F0E2 /* main.m */; };
 		378C9F8F247FFA7F0078F0E2 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 378C9F8E247FFA7F0078F0E2 /* Person.m */; };
+		378C9F932480AFA90078F0E2 /* NetWorkTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 378C9F922480AFA90078F0E2 /* NetWorkTools.m */; };
 		7DE65319B7BED7940F6FD881 /* libPods-RACDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B02027665CBDF2336A57F03 /* libPods-RACDemo.a */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,8 @@
 		378C9F86247FF2240078F0E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		378C9F8D247FFA7F0078F0E2 /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		378C9F8E247FFA7F0078F0E2 /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		378C9F912480AFA90078F0E2 /* NetWorkTools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetWorkTools.h; sourceTree = "<group>"; };
+		378C9F922480AFA90078F0E2 /* NetWorkTools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetWorkTools.m; sourceTree = "<group>"; };
 		5B02027665CBDF2336A57F03 /* libPods-RACDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RACDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD0FB79DC79C28A1CF68A8E /* Pods-RACDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RACDemo.debug.xcconfig"; path = "Target Support Files/Pods-RACDemo/Pods-RACDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +82,7 @@
 		378C9F73247FF2220078F0E2 /* RACDemo */ = {
 			isa = PBXGroup;
 			children = (
+				378C9F902480AF8D0078F0E2 /* 封装AFN */,
 				378C9F74247FF2220078F0E2 /* AppDelegate.h */,
 				378C9F75247FF2220078F0E2 /* AppDelegate.m */,
 				378C9F77247FF2220078F0E2 /* SceneDelegate.h */,
@@ -94,6 +98,15 @@
 				378C9F86247FF2240078F0E2 /* main.m */,
 			);
 			path = RACDemo;
+			sourceTree = "<group>";
+		};
+		378C9F902480AF8D0078F0E2 /* 封装AFN */ = {
+			isa = PBXGroup;
+			children = (
+				378C9F912480AFA90078F0E2 /* NetWorkTools.h */,
+				378C9F922480AFA90078F0E2 /* NetWorkTools.m */,
+			);
+			path = "封装AFN";
 			sourceTree = "<group>";
 		};
 		F2D58C5A7BAA920C82EEFF84 /* Pods */ = {
@@ -203,6 +216,7 @@
 			files = (
 				378C9F7C247FF2220078F0E2 /* ViewController.m in Sources */,
 				378C9F76247FF2220078F0E2 /* AppDelegate.m in Sources */,
+				378C9F932480AFA90078F0E2 /* NetWorkTools.m in Sources */,
 				378C9F8F247FFA7F0078F0E2 /* Person.m in Sources */,
 				378C9F87247FF2240078F0E2 /* main.m in Sources */,
 				378C9F79247FF2220078F0E2 /* SceneDelegate.m in Sources */,

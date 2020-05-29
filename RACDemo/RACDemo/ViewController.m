@@ -12,6 +12,8 @@
 
 #import "Person.h"
 
+#import "NetWorkTools.h"
+
 @interface ViewController ()
 
 /** per */
@@ -32,6 +34,35 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.person.name = [NSString stringWithFormat:@"test %d", arc4random_uniform(1000)];
+}
+
+
+- (void)networkToolsDemo {
+    //监听信号
+    [[[NetWorkTools sharedTools] getRequestWithURL:@"https://www.baidu.com" params:nil progress:nil] subscribeNext:^(id  _Nullable x) {
+        NSLog(@"success %@",x);
+    } error:^(NSError * _Nullable error) {
+        NSLog(@"error %@", error);
+    }];
+}
+
+- (void)racListenInSystem {
+    //监听APP进入后台
+    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil] subscribeNext:^(NSNotification * _Nullable x) {
+        NSLog(@"APP进入后台了");
+    }];
+}
+
+- (void)racListenInTextField {
+    [[self.textField rac_textSignal] subscribeNext:^(NSString * _Nullable x) {
+        NSLog(@"textField的内容变为: %@",x);
+    }];
+}
+
+- (void)racListenInBtnEvent {
+    [[self.btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        NSLog(@"按钮被点击了");
+    }];
 }
 
 - (void)racListenInKVO {
