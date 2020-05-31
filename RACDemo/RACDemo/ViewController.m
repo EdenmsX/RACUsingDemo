@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 
+/** loginbtn */
+@property(nonatomic, strong) UIButton *loginBtn;
+
 @end
 
 @implementation ViewController
@@ -29,11 +32,71 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self racListenInKVO];
+    [self combineLaestDemo2];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     self.person.name = [NSString stringWithFormat:@"test %d", arc4random_uniform(1000)];
+}
+
+- (void)combineLaestDemo2 {
+    UITextField *accountTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 200, 200, 60)];
+    accountTextField.borderStyle = UITextBorderStyleRoundedRect;
+    accountTextField.placeholder = @"账号";
+    [self.view addSubview:accountTextField];
+    
+    UITextField *pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 300, 200, 60)];
+    pwdTextField.borderStyle = UITextBorderStyleRoundedRect;
+    pwdTextField.placeholder = @"密码";
+    [self.view addSubview:pwdTextField];
+    
+    
+    
+    self.loginBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.view.center.x-30, 400, 60, 40)];
+    [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    [self.loginBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.loginBtn setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
+    [self.view addSubview:self.loginBtn];
+    [self.loginBtn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    @weakify(self)
+    //判断用户名和密码都不为空登录按钮才可以使用
+    [[RACSignal combineLatest:@[accountTextField.rac_textSignal, pwdTextField.rac_textSignal] reduce:^id _Nonnull(NSString *account, NSString *pwd){
+        //获取要监听的控件中的内容
+        NSLog(@"account = %@, pwd = %@", account, pwd);
+        //返回处理结果(以信号形式发送)
+        return @(account.length > 0 && pwd.length > 0);
+    }] subscribeNext:^(id  _Nullable x) {
+        //接收reduceBlock发送的信号
+        NSLog(@"接收到信号  %@", x);
+        //根据信号做对应的操作
+        @strongify(self)
+        self.loginBtn.enabled = [x boolValue];
+    }];
+}
+
+- (void)btnClick {
+    NSLog(@"click");
+}
+
+
+- (void)combineLaestDemo {
+    
+    UITextField *accountTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 200, 200, 60)];
+    accountTextField.borderStyle = UITextBorderStyleRoundedRect;
+    accountTextField.placeholder = @"账号";
+    [self.view addSubview:accountTextField];
+    
+    UITextField *pwdTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 300, 200, 60)];
+    pwdTextField.borderStyle = UITextBorderStyleRoundedRect;
+    pwdTextField.placeholder = @"密码";
+    [self.view addSubview:pwdTextField];
+    
+    [[RACSignal combineLatest:@[accountTextField.rac_textSignal, pwdTextField.rac_textSignal]] subscribeNext:^(RACTuple * _Nullable x) {
+        NSLog(@"%@",x);
+        NSString *account = x.first;
+        NSString *pwd = x.second;
+    }];
 }
 
 
